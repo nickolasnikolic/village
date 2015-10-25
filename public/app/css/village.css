@@ -29,14 +29,12 @@ header div{
 }
 
 #logo{
-  color: white;
   padding: 0 5px;
   margin: 0;
 }
 
 #logo span{
   font-size: 1.8em;
-  text-shadow: white 0px 0px 20px;
 }
 
 #logo img{
