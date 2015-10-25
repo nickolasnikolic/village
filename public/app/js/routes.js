@@ -31,7 +31,7 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
       })
 
       .state('patient', {
-        url: '/dashboard',
+        url: '/patient',
         templateUrl: '../templates/patient-dashboard.html',
         controller: 'PatientController',
         onEnter: function($state) {
