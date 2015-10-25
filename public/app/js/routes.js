@@ -21,21 +21,39 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
         }
       })
 
-      .state('dashboard', {
-        url: '/dashboard',
-        templateUrl: './templates/dashboard.html',
-        controller: 'DashboardController',
-        onEnter: function($state) {
-          console.log('dashboard');
-        }
-      })
-
       .state('doctor', {
         url: '/doctor',
         templateUrl: './templates/doctor-dashboard.html',
         controller: 'DoctorController',
         onEnter: function($state) {
           console.log('doctor');
+        }
+      })
+
+      .state('patient', {
+        url: '/dashboard',
+        templateUrl: '../templates/patient-dashboard.html',
+        controller: 'DashboardController',
+        onEnter: function($state) {
+          console.log('dashboard');
+        }
+      })
+
+      .state('family', {
+        url: '/family',
+        templateUrl: '../templates/family-dashboard.html',
+        controller: 'DashboardController',
+        onEnter: function($state) {
+          console.log('dashboard');
+        }
+      })
+
+      .state('friend', {
+        url: '/dashboard',
+        templateUrl: '../templates/friend-dashboard.html',
+        controller: 'DashboardController',
+        onEnter: function($state) {
+          console.log('dashboard');
         }
       })
 
