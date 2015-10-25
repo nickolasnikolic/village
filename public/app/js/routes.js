@@ -1,4 +1,4 @@
-var blindApp = angular.module('blindApp', ['ui.router', 'ngSanitize', 'angular.filter'])
+var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angular.filter'])
   .config(['$stateProvider',
     function($stateProvider) {
       $stateProvider
@@ -11,6 +11,7 @@ var blindApp = angular.module('blindApp', ['ui.router', 'ngSanitize', 'angular.f
           console.log('home');
         }
       })
+
       .state('publish', {
         url: '/publish',
         templateUrl: './templates/publish.html',
@@ -19,6 +20,25 @@ var blindApp = angular.module('blindApp', ['ui.router', 'ngSanitize', 'angular.f
           console.log('publish');
         }
       })
+
+      .state('dashboard', {
+        url: '/dashboard',
+        templateUrl: './templates/dashboard.html',
+        controller: 'DashboardController',
+        onEnter: function($state) {
+          console.log('dashboard');
+        }
+      })
+
+      .state('doctor', {
+        url: '/doctor',
+        templateUrl: './templates/doctor-dashboard.html',
+        controller: 'DoctorController',
+        onEnter: function($state) {
+          console.log('dashboard');
+        }
+      })
+
       .state('groups', {
         url: '/groups',
         templateUrl: './templates/groups.html',
@@ -27,5 +47,6 @@ var blindApp = angular.module('blindApp', ['ui.router', 'ngSanitize', 'angular.f
           console.log('groups');
         }
       })
+
     }
   ]);

@@ -1,4 +1,4 @@
-blindApp.factory('globals', function() {
+villageApp.factory('globals', function() {
 
     var userId = '';
     var userEmail = '';
