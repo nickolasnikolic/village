@@ -7,6 +7,10 @@ var neo = require('seraph')({
   pass: 'an0moly'
 });
 
+router.post('/bounce', function(req,res,next){
+  res.status(200).send(req.body);
+});
+
 router.get('/caregiver', function(req, res, next) {
   neo.query('match (n:caregiver) return n', function(err, result){
     if(err) throw err;
@@ -16,9 +20,35 @@ router.get('/caregiver', function(req, res, next) {
 
 router.post('/caregiver', function(req, res, next) {
 
-  neo.query('create (n:caregiver {name: {name}, email: {email}})',{
-    name: req.body.name,
-    email: req.body.email
+  neo.query('create (n:caregiver {' +
+      'name: {name}, ' +
+      'email: {email}, ' +
+      'approvalRequired: {approvalRequired},' +
+      'licenseNumber: {licenseNumber},' +
+      'licenseState: {licenseState},' +
+      'licenseType: {licenseType},' +
+      'neverCall: {neverCall},' +
+      'password: {password},' +
+      'phone: {phone},' +
+      'safeword: {safeword},' +
+      'safewordRequired: {safewordRequired}' +
+      '})',{
+
+      name: req.body.name,
+      email: req.body.email,
+
+      approvalRequired: req.body.approvalRequired,
+
+      licenseNumber: req.body.licenseNumber,
+      licenseState: req.body.licenseState,
+      licenseType: req.body.licenseType,
+
+      neverCall: req.body.neverCall,
+      password: req.body.password,
+      phone: req.body.phone,
+      safeword: req.body.safeword,
+      safewordRequired: req.body.safewordRequired
+
   },function(err,node){
     if(err) console.log(err);
     console.log(node);
@@ -29,9 +59,22 @@ router.post('/caregiver', function(req, res, next) {
 
 router.post('/caredfor', function(req, res, next) {
 
-  neo.query('create (n:caredfor {name: {name}, email: {email}})',{
+  neo.query('create (n:caredfor {' +
+  'name: {name}, ' +
+  'email: {email}, ' +
+
+  'neverCall: {neverCall},' +
+  'password: {password},' +
+  'phone: {phone}' +
+
+  '})',{
     name: req.body.name,
-    email: req.body.email
+    email: req.body.email,
+
+    neverCall: req.body.neverCall,
+    password: req.body.password,
+    phone: req.body.phone
+
   },function(err,node){
     if(err) console.log(err);
     console.log(node);
@@ -42,22 +85,22 @@ router.post('/caredfor', function(req, res, next) {
 
 router.post('/family', function(req, res, next) {
 
-  neo.query('create (n:family {name: {name}, email: {email}})',{
+  neo.query('create (n:family {' +
+  'name: {name}, ' +
+  'email: {email}, ' +
+
+  'neverCall: {neverCall},' +
+  'password: {password},' +
+  'phone: {phone}' +
+
+  '})',{
     name: req.body.name,
-    email: req.body.email
-  },function(err,node){
-    if(err) console.log(err);
-    console.log(node);
-    res.status(200).send(node);
-  });
+    email: req.body.email,
 
-});
+    neverCall: req.body.neverCall,
+    password: req.body.password,
+    phone: req.body.phone
 
-router.post('/friend', function(req, res, next) {
-
-  neo.query('create (n:friend {name: {name}, email: {email}})',{
-    name: req.body.name,
-    email: req.body.email
   },function(err,node){
     if(err) console.log(err);
     console.log(node);
@@ -74,7 +117,7 @@ router.post('/relate/caresfor',function(req, res, next){
   var parameters = {n1: node1, n2: node2};
   neo.query(cypher, parameters ,function(err, relationship){
     console.log(relationship);
-    var returnCypher = 'match n-[r]->t return n,r,t'
+    var returnCypher = 'match n-[r]->t return n,r,t';
     neo.query(returnCypher, function(err, result){
       res.status(200).send(result);
     });

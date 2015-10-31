@@ -1,15 +1,3 @@
-/*body{
-  background-color: rgba( 255,255,255,0.5);
-  background-image: url(../images/smoke-smaller.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: left top;
-
-  color: white;
-}
-*/
-
 h1,h2,h3,h4,h5,h6{
   font-family: 'minimobold', sans-serif;
 }
@@ -59,7 +47,6 @@ section{
 }
 
 article{
-  background-color: rgba(255,255,255,0.2);
   padding: 1.2em;
   border-radius: 7px;
   margin-right: 2px;
@@ -67,20 +54,9 @@ article{
   float: left;
 }
 
-article div img.blogImage{
-  width: 12em;
-  margin: 1em;
-}
 
 footer{
-  color: white;
   margin: 2em;
-}
-
-
-.ad{
-  min-height: 10em;
-  background-color: #192931;
 }
 
 a{
@@ -89,80 +65,19 @@ a{
   color: inherit;
 }
 
-a.user-link{
-  font-size: 1.2em;
-  text-decoration: none;
-}
-
-a:visited{
-  color: inherit;
-}
-
 a:hover{
   text-decoration: underline;
 }
 
-aside a{
-  color: white;
-  text-decoration: none;
+.modal-dialog{
+  background-color: white;
+  padding: 1em;
 }
 
-aside a:hover{
-  color: white;
+.modal-dialog input{
+  width: 100%;
 }
 
-aside a:visited{
-  color: white;
-}
-
-ul{
-  list-style: none;
-  width: auto;
-}
-
-input[type="text"],input[type="password"],  textarea{
-  color: black;
-  padding: 0.5em;
-}
-
-input[type="radio"], input[type="checkbox"]{
-  margin: 0 0.3em;
-}
-
-button, input[type="button"], input[type="submit"]{
-  padding: 0.73em;
-}
-
-input[type="text"]:focus, textarea:focus, button:focus{
-  box-shadow: 0px 0px 3px black;
-}
-
-button:focus{
-  box-shadow: 0px 0px 5px black;
-}
-
-
-@media screen and (max-width: 921px){
-  h1{
-    font-size: 1.5em;
-  }
-  #logo img{
-    top: -10px;
-  }
-  
-  .login input, .login button{
-    width: 100%;
-  }
-
-  th{
-    display: none;
-  }
-
-  td{
-    display: block;
-  }
-
-  footer{
-    margin-left: 2em;
-  }
+.modal-dialog .checkbox{
+  padding-left: 20px;
 }

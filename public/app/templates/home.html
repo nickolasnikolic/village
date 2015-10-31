@@ -1,11 +1,130 @@
 <section class="login col-sm-12 col-md-3 col-md-offset-9">
     <form>
-        <input type="text" name="email" class="loginEmail" />
-        <input type="password" name="password" class="loginPassword"
-        <input type="password" name="safeword" class="loginSafeword" />
+        <input type="text" name="email" placeholder="email" class="loginEmail" />
+        <input type="password" name="password" placeholder="password" class="loginPassword" />
+        <input type="password" name="safeword" placeholder="safeword" class="loginSafeword" />
         <button>log in</button>
     </form>
 </section>
 <section class="col-md-12 col-sm-12">
-    <p>home verbiagor</p>
+    <button data-toggle="modal" data-target="#joinModal">join</button>
+</section>
+
+<section>
+    <article>
+        <div id="joinModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Join" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 id="myModalLabel">Join village</h3>
+                    <div id="joinChoice">Join as:
+                        <div id="toggleJoinForm" class="btn-group-xs">
+                            <button ng-click="show('healer')" class="btn btn-primary">healer</button>
+                            <button ng-click="show('caredFor')" class="btn btn-primary">patient</button>
+                            <button ng-click="show('family')" class="btn btn-primary">family or friend</button>
+                        </div>
+                    </div>
+                </div>
+                <form id="healerJoin" class="joinForm" ng-show="showJoinHealer">
+                    <fieldset>
+                        <legend>Join our network as a healer</legend>
+
+                        <label>name</label>
+                        <input name="name" type="text" placeholder="first and last name" ng-model="submitHealer.name">
+
+                        <label>phone</label>
+                        <input name="phone" type=text placeholder="1(555)555-5555" ng-model="submitHealer.phone">
+                        <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
+                        <label class="checkbox">
+                            <input name="meta_neverCall" type="checkbox" ng-model="submitHealer.neverCall">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                        </label>
+                        <hr />
+                        <label>email</label>
+                        <input name="email" type="text" placeholder="valid email address" ng-model="submitHealer.email">
+                        <span class="help-block">All email addresses will be verified.</span>
+
+                        <label>password</label>
+                        <input name="password" type="password" ng-model="submitHealer.password">
+                        <span class="help-block">Make it a great password that evil people can't guess. Memorize it.</span>
+                        <hr />
+                        <label>Your chosen safeword</label>
+                        <input name="safeword" type="text" placeholder="Type something memorable" ng-model="submitHealer.safeword">
+                        <span class="help-block">A safeword is like a group password that you will share with your patients and their loved ones. It helps just a little of the way to know that you are talking to just who you think you are talking to. If someone asks for the safeword that has no reason to need it, be suspicious, and possibly report them to the authorities based on your good judgement. Also, we tell you when someone has logged on without one.</span>
+                        <hr />
+                        <label>verifiable state license identification</label>
+                        <input name="license_type" ng-model="submitHealer.licenseType" type="text" class="input-xlarge" placeholder="what does this license allow you to do?"><br />
+                        <input name="license" ng-model="submitHealer.licenseNumber" type="text" placeholder="license number"><br />
+                        <input name="state_issuer_of_license" ng-model="submitHealer.licenseState" type="text" placeholder="state issuing license"><br />
+                        <span class="help-block">Please be sure that it is a verifiable license from an issuing state agency.</span>
+                        <hr />
+                        <label class="checkbox">
+                            <input ng-model="submitHealer.approvalRequired" name="joinVillageWithoutApproval" type="checkbox">Allow patients to join my villages without my approving them first</input><br />
+                            <input ng-model="submitHealer.safewordRequired" name="requireSafeword" type="checkbox">Require a safeword of all joining and entering my villages</input>
+                        </label>
+                    </fieldset>
+                    <div>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button ng-click="joinHealer(submitHealer)" id="joinSubmit" class="btn btn-primary" data-loading-text="Saving..." data-complete-text="Done">Save changes</button>
+                    </div>
+                </form>
+
+                <form id="patientJoin" class="joinForm" ng-show="showJoinCaredFor">
+                    <fieldset>
+                        <legend>Join our network as a patient</legend>
+
+                        <label>name</label>
+                        <input ng-model="submitCaredFor.name" name="name" type="text" placeholder="first and last name">
+
+                        <label>phone</label>
+                        <input name="phone" ng-model="submitCaredFor.phone"  type=text placeholder="1(555)555-5555">
+                        <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
+                        <label class="checkbox">
+                            <input ng-model="submitCaredFor.neverCall"  name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                        </label>
+                        <hr />
+                        <label>email</label>
+                        <input ng-model="submitCaredFor.email"  name="email" type="text" placeholder="valid email address">
+                        <span class="help-block">All email addresses will be verified.</span>
+
+                        <label>password</label>
+                        <input ng-model="submitCaredFor.password"  name="password" type="password">
+                        <span class="help-block">Make it a great password that evil people can't guess. Memorize it.</span>
+                    </fieldset>
+                    <div>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button ng-click="joinCaredFor(submitCaredFor)" id="joinSubmit" class="btn btn-primary" data-loading-text="Saving..." data-complete-text="Done">Save changes</button>
+                    </div>
+                </form>
+
+                <form id="familyJoin" class="joinForm" ng-show="showJoinFamily">
+                    <fieldset>
+                        <legend>Join our network as a family member or friend</legend>
+
+                        <label>name</label>
+                        <input name="name" type="text" placeholder="first and last name">
+
+                        <label>phone</label>
+                        <input name="meta_phone" type=text placeholder="1(555)555-5555">
+                        <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
+                        <label class="checkbox">
+                            <input name="meta_neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                        </label>
+                        <hr />
+                        <label>email</label>
+                        <input name="email" type="text" placeholder="valid email address">
+                        <span class="help-block">All email addresses will be verified.</span>
+
+                        <label>password</label>
+                        <input name="password" type="password">
+                        <span class="help-block">Make it a great password that evil people can't guess. Memorize it.</span>
+                    </fieldset>
+                    <div>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button ng-click="joinFamily(submitFamily)" id="joinSubmit" class="btn btn-primary" data-loading-text="Saving..." data-complete-text="Done">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </article>
 </section>
