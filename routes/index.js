@@ -124,4 +124,19 @@ router.post('/relate/caresfor',function(req, res, next){
   });
 });
 
+router.post('/relate/family',function(req, res, next){
+    var node1 = req.body.node1;
+    var node2 = req.body.node2;
+
+    var cypher = 'match (a {email:{n1}}),(b {email: {n2}}) create a-[r:caresfor]->b return a,r,b';
+    var parameters = {n1: node1, n2: node2};
+    neo.query(cypher, parameters ,function(err, relationship){
+        console.log(relationship);
+        var returnCypher = 'match n-[r]->t return n,r,t';
+        neo.query(returnCypher, function(err, result){
+            res.status(200).send(result);
+        });
+    });
+});
+
 module.exports = router;
