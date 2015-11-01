@@ -40,8 +40,6 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
 
 }])
 
-villageApp.controller('PublishController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
-
 villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
 
 villageApp.controller('PatientController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])

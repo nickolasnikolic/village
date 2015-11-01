@@ -1,12 +1,25 @@
-
-<section class="col-md-12 col-sm-12">
-    symptoms dash
+<section class="connections col-md-4 col-md-push-8 col-sm-12">
+    <ul>
+        <p>doctors presiding</p>
+        <li ng-repeat="doctor in doctors">{{doctor.name}}</li>
+    </ul>
+    <ul>
+        <p>family</p>
+        <li ng-repeat="member in family">{{member.name}}</li>
+    </ul>
+    <ul>
+        <p>friends and family</p>
+        <li ng-repeat="friend in friends">{{friend.name}}</li>
+    </ul>
 </section>
 
-<section class="col-md-12 col-sm-12">
-    family dash
-</section>
-
-<section class="col-md-12 col-sm-12">
-    friends dash
+<section class="feed col-md-8 col-md-pull-4 col-sm-12 row">
+    <div class="row">
+        <input type="text" class="textInput howAreYou" />
+        <button>share</button>
+    </div>
+    <article class="row" ng-repeat="story in stories">
+        <p>{{story.teller}}</p>
+        <p>{{story.story}}</p>
+    </article>
 </section>
