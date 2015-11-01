@@ -1,5 +1,9 @@
+html,body{
+  font-family: 'carrigtext', serif;
+}
+
 h1,h2,h3,h4,h5,h6{
-  font-family: 'minimobold', sans-serif;
+  font-family: 'carrigdisplay', serif;
 }
 
 header{
