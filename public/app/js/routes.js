@@ -5,61 +5,52 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
 
       .state('home', {
         url: '/',
-        templateUrl: './templates/home.html',
+        templateUrl: 'templates/home.html',
         controller: 'HomeController',
         onEnter: function($state) {
           console.log('home');
         }
       })
 
-      .state('publish', {
-        url: '/publish',
-        templateUrl: './templates/publish.html',
-        controller: 'PublishController',
-        onEnter: function($state) {
-          console.log('publish');
-        }
-      })
-
       .state('doctor', {
         url: '/doctor',
-        templateUrl: './templates/doctor-dashboard.html',
+        templateUrl: 'templates/doctor-dashboard.html',
         controller: 'DoctorController',
         onEnter: function($state) {
-          console.log('doctor');
+          console.log('doctor dashboard');
         }
       })
 
       .state('patient', {
         url: '/patient',
-        templateUrl: '../templates/patient-dashboard.html',
+        templateUrl: 'templates/patient-dashboard.html',
         controller: 'PatientController',
         onEnter: function($state) {
-          console.log('dashboard');
+          console.log('patient dashboard');
         }
       })
 
       .state('family', {
         url: '/family',
-        templateUrl: '../templates/family-dashboard.html',
+        templateUrl: 'templates/family-dashboard.html',
         controller: 'DashboardController',
         onEnter: function($state) {
-          console.log('dashboard');
+          console.log('family dashboard');
         }
       })
 
       .state('friend', {
         url: '/dashboard',
-        templateUrl: '../templates/friend-dashboard.html',
+        templateUrl: 'templates/friend-dashboard.html',
         controller: 'DashboardController',
         onEnter: function($state) {
-          console.log('dashboard');
+          console.log('friend dashboard');
         }
       })
 
       .state('groups', {
         url: '/groups',
-        templateUrl: './templates/groups.html',
+        templateUrl: 'templates/groups.html',
         controller: 'GroupsController',
         onEnter: function($state) {
           console.log('groups');

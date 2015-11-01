@@ -85,3 +85,13 @@ a:hover{
 .modal-dialog .checkbox{
   padding-left: 20px;
 }
+
+.symptoms article{
+  margin: 0;
+  float: left;
+  height: 3em;
+}
+
+.howAreYou{
+  width: 36em;
+}

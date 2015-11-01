@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html ng-app="villageApp" ng-controller="IndexController">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="description" content="village is an open source project that facillitates community-based care." >
-    <meta name="keywords" content="blindworm, equation, math, professor, student" >
+    <meta name="keywords" content="village" >
 
     <title>village</title>
 
+    <link href="css/reset.css" rel="stylesheet" />
     <link href="css/webfonts/carrig_text/stylesheet.css" rel="stylesheet"/>
     <link href="css/webfonts/carrig_display/stylesheet.css" rel="stylesheet"/>
     <link href="css/webfonts/carrig_displayitalic/stylesheet.css" rel="stylesheet"/>
@@ -17,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/vendor/underscore.js"></script>
     <script src="js/vendor/moment.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="js/angular/angular.js"></script>
     <script src="js/angular/angular-ui-router.js"></script>
@@ -33,13 +34,9 @@
 
 
   </head>
-  <body class="container" ng-cloak>
-    <header id="header" class="col-lg-12 col-sm-12">
-      <h1 id="logo"><span>village</span></h1>
-    </header>
-<!-- main view --><div class="col-lg-12 col-sm-12" ui-view></div><!-- main view -->
-    <footer class="col-lg-12 col-sm-12">
-      <p>&copy;nickolas nikolic 2016</p>
-    </footer>
+  <body ng-app="villageApp" class="container" ng-cloak>
+    <header id="header"><h1 id="logo"><span>village</span></h1></header>
+<!-- main view --><div ui-view class="container" ></div><!-- main view -->
+    <footer class="row"><p>&copy;nickolas nikolic 2016</p></footer>
   </body>
 </html>

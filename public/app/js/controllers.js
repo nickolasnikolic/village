@@ -3,11 +3,8 @@ villageApp.controller('IndexController', ['$scope', '$state', 'globals', functio
 villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
 
     $scope.joinHealer = function(input){
-        $http.post('../api/bounce', input)
+        $http.post('../api/caregiver', input)
             .then(function(data){
-                if(data == '1'){
-                    $scope.joined = true;
-                }
                 console.log(data);
             },function(error){
                 console.log(error);
@@ -15,11 +12,8 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
     };
 
     $scope.joinCaredFor = function(input){
-        $http.post('../api/bounce', input)
+        $http.post('../api/caredfor', input)
             .then(function(data){
-                if(data == '1'){
-                    $scope.joined = true;
-                }
                 console.log(data);
             },function(error){
                 console.log(error);
@@ -27,11 +21,8 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
     };
 
     $scope.joinFamily = function(input){
-        $http.post('../api/bounce', input)
+        $http.post('../api/family', input)
             .then(function(data){
-                if(data == '1'){
-                    $scope.joined = true;
-                }
                 console.log(data);
             },function(error){
                 console.log(error);
@@ -48,8 +39,6 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
     };
 
 }])
-
-villageApp.controller('PublishController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
 
 villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
 
