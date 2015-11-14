@@ -1,7 +1,7 @@
 <section class="login col-sm-12 col-md-3 col-md-offset-9">
     <form>
-        <input type="text" name="email" placeholder="email" class="loginEmail" />
-        <input type="password" name="password" placeholder="password" class="loginPassword" />
+        <input type="text" name="loginEmail" placeholder="email" class="loginEmail" />
+        <input type="password" name="loginPassword" placeholder="password" class="loginPassword" />
         <button>log in</button>
     </form>
 </section>
@@ -35,7 +35,7 @@
                         <input name="phone" type=text placeholder="1(555)555-5555" ng-model="submitHealer.phone">
                         <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
                         <label class="checkbox">
-                            <input name="meta_neverCall" type="checkbox" ng-model="submitHealer.neverCall">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                            <input name="meta_neverCall" type="checkbox" ng-model="submitHealer.neverCall" ng-init="submitHealer.neverCall=false">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
                         </label>
                         <hr />
                         <label>email</label>
@@ -57,8 +57,8 @@
                         <span class="help-block">Please be sure that it is a verifiable license from an issuing state agency.</span>
                         <hr />
                         <label class="checkbox">
-                            <input ng-model="submitHealer.approvalRequired" name="joinVillageWithoutApproval" type="checkbox">Allow patients to join my villages without my approving them first</input><br />
-                            <input ng-model="submitHealer.safewordRequired" name="requireSafeword" type="checkbox">Require a safeword of all joining and entering my villages</input>
+                            <input ng-model="submitHealer.approvalRequired" ng-init="submitHealer.approvalRequired=false;" name="joinVillageWithoutApproval" type="checkbox">Allow patients to join my villages without my approving them first</input><br />
+                            <input ng-model="submitHealer.safewordRequired" ng-init="submitHealer.safewordRequired=false" name="requireSafeword" type="checkbox">Require a safeword of all joining and entering my villages</input>
                         </label>
                     </fieldset>
                     <div>
@@ -78,7 +78,7 @@
                         <input name="phone" ng-model="submitCaredFor.phone"  type=text placeholder="1(555)555-5555">
                         <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
                         <label class="checkbox">
-                            <input ng-model="submitCaredFor.neverCall"  name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                            <input ng-model="submitCaredFor.neverCall"  ng-init="submitCaredFor.neverCall=false" name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
                         </label>
                         <hr />
                         <label>email</label>
@@ -106,7 +106,7 @@
                         <input ng-model="submitFamily.phone" name="phone" type=text placeholder="1(555)555-5555">
                         <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
                         <label class="checkbox">
-                            <input ng-model="submitFamily.neverCall" checked='checked' name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+                            <input ng-model="submitFamily.neverCall" ng-init="submitFamily.neverCall=false" checked='checked' name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
                         </label>
                         <hr />
                         <label>email</label>

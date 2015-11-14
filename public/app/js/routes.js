@@ -33,16 +33,16 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
       .state('family', {
         url: '/family',
         templateUrl: 'templates/family-dashboard.html',
-        controller: 'DashboardController',
+        controller: 'FamilyController',
         onEnter: function($state) {
           console.log('family dashboard');
         }
       })
 
       .state('friend', {
-        url: '/dashboard',
+        url: '/friend',
         templateUrl: 'templates/friend-dashboard.html',
-        controller: 'DashboardController',
+        controller: 'FriendsController',
         onEnter: function($state) {
           console.log('friend dashboard');
         }

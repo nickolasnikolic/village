@@ -2,6 +2,18 @@ villageApp.controller('IndexController', ['$scope', '$state', 'globals', functio
 
 villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
 
+    $scope.login = function(user, pass){
+        $http.post('../api/login', {
+            loginEmail: user,
+            loginPassword: pass
+        })
+            .then(function(data){
+                console.log(data);
+            },function(error){
+                console.log(error);
+            });
+    };
+
     $scope.joinHealer = function(input){
         $http.post('../api/caregiver', input)
             .then(function(data){
@@ -40,10 +52,53 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
 
 }])
 
-villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
+villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.patients = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+}])
 
-villageApp.controller('PatientController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
+villageApp.controller('PatientController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.doctors = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+}])
 
-villageApp.controller('DashboardController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
+villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.patients = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+}])
 
-villageApp.controller('GroupController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
+villageApp.controller('FriendsController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.patients = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+}])
+
+villageApp.controller('GroupController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.doctors = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+    $scope.patients = [
+        {name: 'fee'},
+        {name: 'fie'},
+        {name: 'foe'},
+        {name: 'fum'}
+    ];
+}])

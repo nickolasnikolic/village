@@ -11,6 +11,22 @@ router.post('/bounce', function(req,res,next){
   res.status(200).send(req.body);
 });
 
+router.post('/login', function(req, res, next){
+    var user = req.body.loginEmail;
+    var password = req.body.loginPassword;
+
+    neo.query('match (n {email: {user}, password: {password}}) return n', {
+        user: user,
+        password: password
+    }, function(err, node){
+        if(err) throw err;
+        //if user exists, set session var
+        if(node){
+            console.log(node);//todo
+        }
+    });
+});
+
 router.get('/caregiver', function(req, res, next) {
   neo.query('match (n:caregiver) return n', function(err, result){
     if(err) throw err;
