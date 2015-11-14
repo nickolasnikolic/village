@@ -1,8 +1,8 @@
 <section class="login col-sm-12 col-md-3 col-md-offset-9">
     <form>
-        <input type="text" name="loginEmail" placeholder="email" class="loginEmail" />
-        <input type="password" name="loginPassword" placeholder="password" class="loginPassword" />
-        <button>log in</button>
+        <input type="text" ng-model="loginData.email" name="loginEmail" placeholder="email" class="loginEmail" /><br />
+        <input type="password" ng-model="loginData.pw" name="loginPassword" placeholder="password" class="loginPassword" /><br />
+        <button ng-click="login(loginData)">log in</button>
     </form>
 </section>
 <section class="col-md-12 col-sm-12">

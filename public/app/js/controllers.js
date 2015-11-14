@@ -2,13 +2,14 @@ villageApp.controller('IndexController', ['$scope', '$state', 'globals', functio
 
 villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
 
-    $scope.login = function(user, pass){
+    $scope.login = function(loginCred){
         $http.post('../api/login', {
-            loginEmail: user,
-            loginPassword: pass
+            loginEmail: loginCred.email,
+            loginPassword: loginCred.pw
         })
             .then(function(data){
                 console.log(data);
+
             },function(error){
                 console.log(error);
             });
@@ -18,6 +19,7 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
         $http.post('../api/caregiver', input)
             .then(function(data){
                 console.log(data);
+                $('#joinModal').hide(); //hide modal
             },function(error){
                 console.log(error);
             });
@@ -27,6 +29,7 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
         $http.post('../api/caredfor', input)
             .then(function(data){
                 console.log(data);
+                $('#joinModal').hide(); //hide modal
             },function(error){
                 console.log(error);
             });
@@ -36,6 +39,7 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
         $http.post('../api/family', input)
             .then(function(data){
                 console.log(data);
+                $('#joinModal').hide(); //hide modal
             },function(error){
                 console.log(error);
             });

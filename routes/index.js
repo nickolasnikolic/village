@@ -23,6 +23,7 @@ router.post('/login', function(req, res, next){
         //if user exists, set session var
         if(node){
             console.log(node);//todo
+            res.status(200).send(node);
         }
     });
 });
