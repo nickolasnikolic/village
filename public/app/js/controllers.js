@@ -9,6 +9,19 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
         })
             .then(function(data){
                 console.log(data);
+                globals.user = data.data[0].node;
+                console.log(globals.user);
+                switch(data.data[0].labels[0]){
+                    case 'caregiver':
+                        $state.go('caregiver');
+                        break;
+                    case 'caredfor':
+                        $state.go('caredfor');
+                        break;
+                    case 'family':
+                        $state.go('family');
+                        break;
+                }
 
             },function(error){
                 console.log(error);
@@ -56,7 +69,7 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
 
 }])
 
-villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.patients = [
         {name: 'fee'},
         {name: 'fie'},
@@ -65,7 +78,7 @@ villageApp.controller('DoctorController', ['$scope', '$state', '$http', 'globals
     ];
 }])
 
-villageApp.controller('PatientController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.doctors = [
         {name: 'fee'},
         {name: 'fie'},

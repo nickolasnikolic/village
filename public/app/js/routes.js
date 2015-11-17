@@ -12,21 +12,21 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
         }
       })
 
-      .state('doctor', {
-        url: '/doctor',
-        templateUrl: 'templates/doctor-dashboard.html',
-        controller: 'DoctorController',
+      .state('caregiver', {
+        url: '/caregiver',
+        templateUrl: 'templates/caregiver-dashboard.html',
+        controller: 'CareGiverController',
         onEnter: function($state) {
-          console.log('doctor dashboard');
+          console.log('care giver dashboard');
         }
       })
 
-      .state('patient', {
-        url: '/patient',
-        templateUrl: 'templates/patient-dashboard.html',
-        controller: 'PatientController',
+      .state('caredfor', {
+        url: '/caredfor',
+        templateUrl: 'templates/caredfor-dashboard.html',
+        controller: 'CaredForController',
         onEnter: function($state) {
-          console.log('patient dashboard');
+          console.log('cared for dashboard');
         }
       })
 
@@ -36,15 +36,6 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
         controller: 'FamilyController',
         onEnter: function($state) {
           console.log('family dashboard');
-        }
-      })
-
-      .state('friend', {
-        url: '/friend',
-        templateUrl: 'templates/friend-dashboard.html',
-        controller: 'FriendsController',
-        onEnter: function($state) {
-          console.log('friend dashboard');
         }
       })
 

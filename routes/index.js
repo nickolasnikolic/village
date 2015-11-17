@@ -15,7 +15,7 @@ router.post('/login', function(req, res, next){
     var user = req.body.loginEmail;
     var password = req.body.loginPassword;
 
-    neo.query('match (n {email: {user}, password: {password}}) return n', {
+    neo.query('match (node {email: {user}, password: {password}}) return node, labels(node) as labels', {
         user: user,
         password: password
     }, function(err, node){

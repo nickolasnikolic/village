@@ -1,33 +1,10 @@
 villageApp.factory('globals', function() {
 
-    var userId = '';
-    var userEmail = '';
-    var items = [];
-    var itemsService = {};
+    var Service = {};
 
-    itemsService.add = function(item) {
-        items.push(item);
-    };
-    itemsService.list = function() {
-        return items;
-    };
+    Service.user = null;
+    Service.role = null;
 
-    itemsService.getUserId = function(){
-      return userId;
-    };
-
-    itemsService.setUserId = function( whatToSetItTo ){
-      userId = whatToSetItTo;
-    };
-
-    itemsService.setUserEmail = function( whatToSetItTo ){
-      userEmail = whatToSetItTo;
-    };
-
-    itemsService.getUserEmail = function(){
-      return userEmail;
-    };
-
-    return itemsService;
+    return Service;
 
 });
