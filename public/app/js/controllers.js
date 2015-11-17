@@ -69,6 +69,13 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
 
 }])
 
+villageApp.controller('LogoutController', ['$scope', '$state', 'globals', function($scope, $state, globals){
+    $scope.logout = function(){
+        globals = null;
+        $state.go('home');
+    };
+}]);
+
 villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.patients = [
         {name: 'fee'},
