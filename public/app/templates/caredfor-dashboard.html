@@ -10,15 +10,11 @@
 <section class="connections col-md-4 col-md-push-8 col-sm-12">
     <ul>
         <p>doctors presiding</p>
-        <li ng-repeat="doctor in doctors">{{doctor.name}}</li>
+        <li ng-repeat="doctor in doctors">{{doctor.node.name}}</li>
     </ul>
     <ul>
-        <p>family</p>
+        <p>family and friends</p>
         <li ng-repeat="member in family">{{member.name}}</li>
-    </ul>
-    <ul>
-        <p>friends and family</p>
-        <li ng-repeat="friend in friends">{{friend.name}}</li>
     </ul>
 </section>
 

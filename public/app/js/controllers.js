@@ -86,24 +86,24 @@ villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'glob
 }])
 
 villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.doctors = [
+    $scope.doctors = [];
+    $scope.family = [
         {name: 'fee'},
         {name: 'fie'},
         {name: 'foe'},
         {name: 'fum'}
     ];
+
+    $http.get('../api/caresfor', function(data){
+        console.log(data);
+        $scope.doctors = data.data;
+    },function(error){
+        console.log('error:', error);
+    });
+
 }])
 
 villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.patients = [
-        {name: 'fee'},
-        {name: 'fie'},
-        {name: 'foe'},
-        {name: 'fum'}
-    ];
-}])
-
-villageApp.controller('FriendsController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.patients = [
         {name: 'fee'},
         {name: 'fie'},
