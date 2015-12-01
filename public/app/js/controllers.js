@@ -94,12 +94,13 @@ villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globa
         {name: 'fum'}
     ];
 
-    $http.get('../api/caresfor', function(data){
-        console.log(data);
-        $scope.doctors = data.data;
-    },function(error){
-        console.log('error:', error);
-    });
+    $http.get('../api/caregivers')
+        .then(function(data){
+            console.log(data.data);
+            $scope.doctors = data.data;
+        },function(error){
+            console.log('error:', error);
+        });
 
 }])
 

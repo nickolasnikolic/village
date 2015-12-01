@@ -35,8 +35,8 @@ router.get('/caregiver', function(req, res, next) {
   });
 });
 
-//return caregivers of a particular caredfor person
-router.get('/caregiver/:caresfor', function(req, res, next){
+//return caregivers
+router.get('/caregivers', function(req, res, next){
 
     neo.query( 'match (n:caregiver), (b:caredfor) where n-[]->b return n', function(err, nodes){//todo fix this query
         if(err) return err;
