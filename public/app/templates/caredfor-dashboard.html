@@ -14,17 +14,17 @@
     </ul>
     <ul>
         <p>family and friends</p>
-        <li ng-repeat="member in family">{{member.name}}</li>
+        <li ng-repeat="member in family">{{member.n.name}}</li>
     </ul>
 </section>
 
-<section class="feed col-md-8 col-md-pull-4 col-sm-12 row">
-    <div class="row">
+<section class="feed col-md-8 col-md-pull-4 col-sm-12 row" ng-controller="PostController">
+    <div>
         <input type="text" class="textInput howAreYou" />
-        <button>share</button>
+        <button ng-click="post()">share</button>
     </div>
-    <article class="row" ng-repeat="story in stories">
-        <p>{{story.teller}}</p>
+    <article class="row col-md-12 col-sm-12" ng-repeat="story in stories">
+        <p><strong>{{story.teller}}</strong></p>
         <p>{{story.story}}</p>
     </article>
 </section>

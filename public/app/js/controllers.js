@@ -87,17 +87,21 @@ villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'glob
 
 villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.doctors = [];
-    $scope.family = [
-        {name: 'fee'},
-        {name: 'fie'},
-        {name: 'foe'},
-        {name: 'fum'}
-    ];
+    $scope.family = [];
 
     $http.get('../api/caregivers')
         .then(function(data){
             console.log(data.data);
+            globals.userId = data.data[0].email;
             $scope.doctors = data.data;
+        },function(error){
+            console.log('error:', error);
+        });
+
+    $http.get('../api/family')
+        .then(function(data){
+            console.log(data.data);
+            $scope.family = data.data;
         },function(error){
             console.log('error:', error);
         });
@@ -111,6 +115,27 @@ villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals
         {name: 'foe'},
         {name: 'fum'}
     ];
+}])
+
+
+villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.stories = [];
+
+    $scope.post = function(){
+        var postText = $('.howAreYou').val(); //store the original value
+        $('.howAreYou').val(''); //empty out original value
+
+        $http.post( '../api/posts', { owner: globals.userId, post: postText } );
+    };
+
+    $http.get('../api/posts')
+        .then(function(data){
+            console.log(data.data);
+            $scope.stories = data.data;
+        },function(error){
+            console.log(error);
+        });
+
 }])
 
 villageApp.controller('GroupController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {

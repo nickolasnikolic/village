@@ -111,6 +111,16 @@ router.post('/caredfor', function(req, res, next) {
 
 });
 
+//return caregivers
+router.get('/family', function(req, res, next){
+
+    neo.query( 'match (n:family)-[]-> (b:caredfor) return n,b', function(err, nodes){//todo fix this query
+        if(err) return err;
+        res.status(200).send(nodes);
+    } );
+
+});
+
 router.post('/family', function(req, res, next) {
 
   neo.query('create (n:family {' +
@@ -165,6 +175,29 @@ router.post('/relate/family',function(req, res, next){
             res.status(200).send(result);
         });
     });
+});
+
+router.post('/posts',function(req, res, next){
+    var owner = req.body.owner;
+    var post = req.body.post;
+
+    var cypher = 'match (a {email:{email}}) create a-[r:posted]->(p:post {date: timestamp(), teller: {teller}, story: {story}}) return p order by date desc';
+    var parameters = {email: owner, teller: owner, story: post};
+    neo.query(cypher, parameters ,function(err, posts){
+        console.log(posts);
+        neo.query('match (p:post) return p', function(err, result){ //todo fix query
+            res.status(200).send(result);
+        });
+
+    });
+});
+
+router.get('/posts', function(req, res, next){
+
+    neo.query('match (p:post) return p', function(err, result){ //todo fix query
+        res.status(200).send(result);
+    });
+
 });
 
 module.exports = router;
