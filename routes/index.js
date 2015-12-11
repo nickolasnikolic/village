@@ -36,9 +36,19 @@ router.get('/caregiver', function(req, res, next) {
 });
 
 //return caregivers
-router.get('/caregivers', function(req, res, next){
+router.get('/caregiver/caresfor/:caregiver', function(req, res, next){
 
-    neo.query( 'match (n:caregiver), (b:caredfor) where n-[]->b return n', function(err, nodes){//todo fix this query
+    neo.query( 'match (n:caregiver {email: {cg}}), (b:caredfor) where n-[]->b return b', {cg:req.params.caregiver}, function(err, nodes){//todo fix this query
+        if(err) return err;
+        res.status(200).send(nodes);
+    } );
+
+});
+
+//return caregivers
+router.get('/caregivers/of/:caredfor', function(req, res, next){
+
+    neo.query( 'match (n:caregiver), (b:caredfor {email: {cf}}) where n-[]->b return n', {cf:req.params.caredfor}, function(err, nodes){//todo fix this query
         if(err) return err;
         res.status(200).send(nodes);
     } );
@@ -114,7 +124,17 @@ router.post('/caredfor', function(req, res, next) {
 //return caregivers
 router.get('/family', function(req, res, next){
 
-    neo.query( 'match (n:family)-[]-> (b:caredfor) return n,b', function(err, nodes){//todo fix this query
+    neo.query( 'match (n:family), (b:caredfor) where n-[]->b return n', function(err, nodes){//todo fix this query
+        if(err) return err;
+        res.status(200).send(nodes);
+    } );
+
+});
+
+//return caregivers
+router.get('/family/of/:caredfor', function(req, res, next){
+
+    neo.query( 'match (n:family), (b:caredfor {email: {cf}}) where n-[]->b return n',{cf: req.params.caredfor}, function(err, nodes){//todo fix this query
         if(err) return err;
         res.status(200).send(nodes);
     } );
@@ -181,15 +201,24 @@ router.post('/posts',function(req, res, next){
     var owner = req.body.owner;
     var post = req.body.post;
 
-    var cypher = 'match (a {email:{email}}) create a-[r:posted]->(p:post {date: timestamp(), teller: {teller}, story: {story}}) return p order by date desc';
-    var parameters = {email: owner, teller: owner, story: post};
+    var cypher = 'match (a {email:{e}}) create a-[r:posted]->(p:post {date: timestamp(), teller: {teller}, story: {story}}) return p order by p.date desc';
+    var parameters = {e: owner, teller: owner, story: post};
     neo.query(cypher, parameters ,function(err, posts){
         console.log(posts);
-        neo.query('match (p:post) return p', function(err, result){ //todo fix query
+        neo.query('match (n {email: owner}),(p:post) where n-[]->p return p', parameters, function(err, result){ //todo fix query
             res.status(200).send(result);
         });
 
     });
+});
+
+
+router.get('/posts/around/:you', function(req, res, next){
+
+    neo.query('match (n {email: {y}})-[r:posted]->(p:post) return p', {y:req.params.you}, function(err, result){ //todo fix query
+        res.status(200).send(result);
+    });
+
 });
 
 router.get('/posts', function(req, res, next){

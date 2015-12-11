@@ -2,19 +2,17 @@
 
 <section class="symptoms col-md-12">
     <article class="col-md-5">symptoms analytics</article>
-    <article class="col-md-3">symptoms analytics</article>
-    <article class="col-md-2">symptoms analytics</article>
-    <article class="col-md-2">symptoms analytics</article>
+    <article class="col-md-7">symptoms analytics</article>
 </section>
 
 <section class="connections col-md-4 col-md-push-8 col-sm-12">
     <ul>
-        <p>doctors presiding</p>
-        <li ng-repeat="doctor in doctors">{{doctor.name}}</li>
+        <p>caregivers presiding:</p>
+        <li ng-repeat="caregiver in caregivers">{{caregiver.name}}</li>
     </ul>
     <ul>
-        <p>family and friends</p>
-        <li ng-repeat="member in family">{{member.n.name}}</li>
+        <p>family and friends in your village:</p>
+        <li ng-repeat="member in family">{{member.name}}</li>
     </ul>
 </section>
 

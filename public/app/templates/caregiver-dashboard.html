@@ -1,22 +1,21 @@
 <section ng-controller="LogoutController"><button ng-click="logout()">logout</button></section>
 
 <section class="col-md-12 col-sm-12">
-    highlights dash <small>things like warning notices</small>
+    <p>highlights dash <small>things like warning notices</small></p>
 </section>
 
 <section class="col-md-12 col-sm-12">
-    patients dash list of patients, most active villages, least active?
+    <p>patients dash list of patients, most active villages, least active?</p>
+</section>
 
-    <section class="col-md-12 col-sm-12">
-        symptoms dash
-    </section>
 
-    <section class="col-md-12 col-sm-12">
-        family dash
-    </section>
-
-    <section class="col-md-12 col-sm-12">
-        friends dash
-    </section>
-
+<section class="feed col-md-8 col-md-pull-4 col-sm-12 row" ng-controller="PostController">
+    <div>
+        <input type="text" class="textInput howAreYou" />
+        <button ng-click="post()">share</button>
+    </div>
+    <article class="row col-md-12 col-sm-12" ng-repeat="story in stories">
+        <p><strong>{{story.teller}}</strong></p>
+        <p>{{story.story}}</p>
+    </article>
 </section>

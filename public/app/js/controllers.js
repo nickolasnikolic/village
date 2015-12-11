@@ -8,9 +8,9 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
             loginPassword: loginCred.pw
         })
             .then(function(data){
-                console.log(data);
+
                 globals.user = data.data[0].node;
-                console.log(globals.user);
+
                 switch(data.data[0].labels[0]){
                     case 'caregiver':
                         $state.go('caregiver');
@@ -29,30 +29,30 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
     };
 
     $scope.joinHealer = function(input){
-        $http.post('../api/caregiver', input)
+        $http.post('../api/join/caregiver', input)
             .then(function(data){
                 console.log(data);
-                $('#joinModal').hide(); //hide modal
+                $('#joinModal').modal('hide'); //hide modal
             },function(error){
                 console.log(error);
             });
     };
 
     $scope.joinCaredFor = function(input){
-        $http.post('../api/caredfor', input)
+        $http.post('../api/join/caredfor', input)
             .then(function(data){
                 console.log(data);
-                $('#joinModal').hide(); //hide modal
+                $('#joinModal').modal('hide'); //hide modal
             },function(error){
                 console.log(error);
             });
     };
 
     $scope.joinFamily = function(input){
-        $http.post('../api/family', input)
+        $http.post('../api/join/family', input)
             .then(function(data){
                 console.log(data);
-                $('#joinModal').hide(); //hide modal
+                $('#joinModal').modal('hide'); //hide modal
             },function(error){
                 console.log(error);
             });
@@ -77,23 +77,13 @@ villageApp.controller('LogoutController', ['$scope', '$state', 'globals', functi
 }]);
 
 villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.patients = [
-        {name: 'fee'},
-        {name: 'fie'},
-        {name: 'foe'},
-        {name: 'fum'}
-    ];
-}])
-
-villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.doctors = [];
+    $scope.caresfor = [];
     $scope.family = [];
 
-    $http.get('../api/caregivers')
+    $http.get('../api/caregiver/caresfor/' + globals.user.email )
         .then(function(data){
             console.log(data.data);
-            globals.userId = data.data[0].email;
-            $scope.doctors = data.data;
+            $scope.caresfor = data.data;
         },function(error){
             console.log('error:', error);
         });
@@ -105,16 +95,40 @@ villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globa
         },function(error){
             console.log('error:', error);
         });
+}])
+
+villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.caregivers = [];
+    $scope.family = [];
+
+    $http.get('../api/caregivers/of/' + globals.user.email)
+        .then(function(data){
+            console.log(data.data);
+            $scope.caregivers = data.data;
+        },function(error){
+            console.log('error:', error);
+        });
+
+    $http.get('../api/family/of/' + globals.user.email)
+        .then(function(data){
+            console.log(data.data);
+            $scope.family = data.data;
+        },function(error){
+            console.log('error:', error);
+        });
 
 }])
 
 villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.patients = [
-        {name: 'fee'},
-        {name: 'fie'},
-        {name: 'foe'},
-        {name: 'fum'}
-    ];
+    $scope.family = [];
+
+    $http.get('../api/family')
+        .then(function(data){
+            console.log(data.data);
+            $scope.family = data.data;
+        },function(error){
+            console.log('error:', error);
+        });
 }])
 
 
@@ -122,13 +136,21 @@ villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals',
     $scope.stories = [];
 
     $scope.post = function(){
+
+
         var postText = $('.howAreYou').val(); //store the original value
         $('.howAreYou').val(''); //empty out original value
 
-        $http.post( '../api/posts', { owner: globals.userId, post: postText } );
+        var now = moment();
+        $http.post( '../api/posts', { owner: globals.user.email, post: postText, now: now})
+            .then(function(data){
+                $scope.stories = data.data;
+            },function(error){
+                console.log('error:', error);
+            });
     };
 
-    $http.get('../api/posts')
+    $http.get('../api/posts/around/' + globals.user.email)
         .then(function(data){
             console.log(data.data);
             $scope.stories = data.data;
