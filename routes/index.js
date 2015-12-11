@@ -19,11 +19,11 @@ router.post('/login', function(req, res, next){
         user: user,
         password: password
     }, function(err, node){
-        if(err) throw err;
-        //if user exists, set session var
         if(node){
             console.log(node);//todo
             res.status(200).send(node);
+        }else{
+            res.status(200).send('yo, good to see ya!');
         }
     });
 });
@@ -215,7 +215,8 @@ router.post('/posts',function(req, res, next){
 
 router.get('/posts/around/:you', function(req, res, next){
 
-    neo.query('match (n {email: {y}})-[r:posted]->(p:post) return p', {y:req.params.you}, function(err, result){ //todo fix query
+    neo.query('match (n {email: {y}})<-[c:caresfor]-a-[r:posted]->(p:post) return p', {y: req.params.you}, function(err, result){ //todo fix query
+        console.log(result);
         res.status(200).send(result);
     });
 

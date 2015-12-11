@@ -135,8 +135,19 @@ villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals
 villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.stories = [];
 
-    $scope.post = function(){
+    function refreshPosts() {
+        $http.get('../api/posts/around/' + globals.user.email)
+            .then(function (data) {
+                console.log(data.data);
+                $scope.stories = data.data;
+            }, function (error) {
+                console.log(error);
+            });
+    }
 
+    refreshPosts();
+
+    $scope.post = function(){
 
         var postText = $('.howAreYou').val(); //store the original value
         $('.howAreYou').val(''); //empty out original value
@@ -144,19 +155,11 @@ villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals',
         var now = moment();
         $http.post( '../api/posts', { owner: globals.user.email, post: postText, now: now})
             .then(function(data){
-                $scope.stories = data.data;
+                refreshPosts();
             },function(error){
                 console.log('error:', error);
             });
     };
-
-    $http.get('../api/posts/around/' + globals.user.email)
-        .then(function(data){
-            console.log(data.data);
-            $scope.stories = data.data;
-        },function(error){
-            console.log(error);
-        });
 
 }])
 
