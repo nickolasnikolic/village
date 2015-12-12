@@ -1,21 +1,28 @@
 <section ng-controller="LogoutController"><button ng-click="logout()">logout</button></section>
 
-<section class="col-md-12 col-sm-12">
-    <p>highlights dash <small>things like warning notices</small></p>
+<section ng-if="importantMessages.length" class="col-md-12 col-sm-12 jumbotron">
+    <p class="row">highlights:</p>
+    <p class="row" ng-repeat="important in importantMessages">{{important.message}}</p>
 </section>
 
 <section class="col-md-12 col-sm-12">
-    <p>patients dash list of patients, most active villages, least active?</p>
+    <p class="row">villages:</p>
+    <p class="row" ng-repeat="village in villages"><input type="checkbox" name="{{village.name}}" ng-model="village.switch.active"></input>&nbsp;{{village.name}}</p>
 </section>
 
 
-<section class="feed col-md-8 col-md-pull-4 col-sm-12 row" ng-controller="PostController">
-    <div>
+<section class="feed col-md-12 col-sm-12 row" ng-controller="CaregiverPostController">
+    <article class="col-md-12 col-sm-12">
         <input type="text" class="textInput howAreYou" />
         <button ng-click="post()">share</button>
-    </div>
-    <article class="row col-md-12 col-sm-12" ng-repeat="story in stories">
-        <p><strong>{{story.teller}}</strong></p>
-        <p>{{story.story}}</p>
+    </article>
+    <article class="col-md-12 col-sm-12" ng-repeat="village in villages">
+        <div ng-show="village.switch.active">
+            <p>from {{village.name}}</p>
+            <div class="row col-md-12 col-sm-12" ng-repeat="story in village.stories">
+                <p><strong>{{story.teller}}</strong></p>
+                <p>{{story.story}}</p>
+            </div>
+        </div>
     </article>
 </section>

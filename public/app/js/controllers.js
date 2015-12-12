@@ -76,25 +76,17 @@ villageApp.controller('LogoutController', ['$scope', '$state', 'globals', functi
     };
 }]);
 
-villageApp.controller('CareGiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
-    $scope.caresfor = [];
-    $scope.family = [];
+villageApp.controller('CaregiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
 
-    $http.get('../api/caregiver/caresfor/' + globals.user.email )
+    $scope.villages = [];
+
+    $http.get('../api/caregiver/villages/' + globals.user.email )
         .then(function(data){
-            console.log(data.data);
-            $scope.caresfor = data.data;
+            $scope.villages = data.data;
         },function(error){
             console.log('error:', error);
         });
 
-    $http.get('../api/family')
-        .then(function(data){
-            console.log(data.data);
-            $scope.family = data.data;
-        },function(error){
-            console.log('error:', error);
-        });
 }])
 
 villageApp.controller('CaredForController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
@@ -152,8 +144,44 @@ villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals',
         var postText = $('.howAreYou').val(); //store the original value
         $('.howAreYou').val(''); //empty out original value
 
-        var now = moment();
-        $http.post( '../api/posts', { owner: globals.user.email, post: postText, now: now})
+        $http.post( '../api/posts', { owner: globals.user.email, post: postText})
+            .then(function(data){
+                refreshPosts();
+            },function(error){
+                console.log('error:', error);
+            });
+    };
+
+}])
+
+villageApp.controller('CaregiverPostController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+
+    $scope.stories = [];
+    function refreshPosts() {
+        _.each($scope.villages, function (village) {
+            console.log(village);
+            if (village.switch.active) {
+
+                $http.get('../api/caregiver/villages/posts/around/' + village.uid)
+                    .then(function (data) {
+                        $scope.stories = data.data;
+                    }, function (error) {
+                        console.log(error);
+                    });
+
+            }
+        });
+    }
+    refreshPosts();
+
+    $scope.post = function(){
+
+        var postText = $('.howAreYou').val(); //store the original value
+        $('.howAreYou').val(''); //empty out original value
+
+        var whichVillage = ''; //todo dunno at this time
+
+        $http.post( '../api/caregiver/posts', { owner: globals.user.email, post: postText, village: whichVillage })
             .then(function(data){
                 refreshPosts();
             },function(error){

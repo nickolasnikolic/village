@@ -19,11 +19,10 @@ router.post('/login', function(req, res, next){
         user: user,
         password: password
     }, function(err, node){
-        if(node){
-            console.log(node);//todo
+        if(node.length == 1){
             res.status(200).send(node);
         }else{
-            res.status(200).send('yo, good to see ya!');
+            res.status(403).send('yo, good to see ya!');
         }
     });
 });
@@ -38,7 +37,7 @@ router.get('/caregiver', function(req, res, next) {
 //return caregivers
 router.get('/caregiver/caresfor/:caregiver', function(req, res, next){
 
-    neo.query( 'match (n:caregiver {email: {cg}}), (b:caredfor) where n-[]->b return b', {cg:req.params.caregiver}, function(err, nodes){//todo fix this query
+    neo.query( 'match (n:caregiver {email: {cg}}), (b:village), (c:caredfor) where n-[*]->c return c', {cg:req.params.caregiver}, function(err, nodes){//todo fix this query
         if(err) return err;
         res.status(200).send(nodes);
     } );
@@ -215,9 +214,27 @@ router.post('/posts',function(req, res, next){
 
 router.get('/posts/around/:you', function(req, res, next){
 
-    neo.query('match (n {email: {y}})<-[c:caresfor]-a-[r:posted]->(p:post) return p', {y: req.params.you}, function(err, result){ //todo fix query
+    neo.query('match (n {email: {you}})<-[c:caresfor]-a-[r:posted]->(p:post) return p', {you: req.params.you}, function(err, result){ //todo fix query
         console.log(result);
         res.status(200).send(result);
+    });
+
+});
+
+router.get('/caregiver/villages/posts/around/:village', function(req, res, next){
+
+    neo.query('match (v:village {uid: {your}})-[:healing]-()<-[*]->(p:post) return p', {your: req.params.village}, function(err, result){
+        console.log(result);
+        res.status(200).send(result);
+    });
+
+});
+
+router.get('/caregiver/villages/:you', function(req, res, next){
+
+    neo.query('match (n:caregiver {email:{y}})-[r:healer]->(v:village) return v;', {y: req.params.you}, function(err, results){
+        console.log(results);
+        res.status(200).send(results);
     });
 
 });

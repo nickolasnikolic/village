@@ -15,7 +15,7 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
       .state('caregiver', {
         url: '/caregiver',
         templateUrl: 'templates/caregiver-dashboard.html',
-        controller: 'CareGiverController',
+        controller: 'CaregiverController',
         onEnter: function($state) {
           console.log('care giver dashboard');
         }
