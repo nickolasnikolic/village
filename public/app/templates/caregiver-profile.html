@@ -1,0 +1,44 @@
+<section>
+    <form class="profileForm">
+        <fieldset>
+            <legend>Healer Profile</legend>
+
+            <label>name</label>
+            <input name="name" type="text" placeholder="first and last name" ng-model="profileHealer.name">
+
+            <label>phone</label>
+            <input name="phone" type=text placeholder="1(555)555-5555" ng-model="profileHealer.phone">
+            <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
+            <label class="checkbox">
+                <input name="meta_neverCall" type="checkbox" ng-model="profileHealer.neverCall" ng-init="submitHealer.neverCall=false">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+            </label>
+            <hr />
+            <label>email</label>
+            <input name="email" type="text" placeholder="valid email address" ng-model="profileHealer.email">
+            <span class="help-block">All email addresses will be verified.</span>
+
+            <label>password</label>
+            <input name="password" type="password" ng-model="profileHealer.password">
+            <span class="help-block">Make it a great password that evil people can't guess. Memorize it.</span>
+            <hr />
+            <label>Your chosen safeword</label>
+            <input name="safeword" type="text" placeholder="Type something memorable" ng-model="profileHealer.safeword">
+            <span class="help-block">A safeword is like a group password that you will share with your patients and their loved ones. It helps just a little of the way to know that you are talking to just who you think you are talking to. If someone asks for the safeword that has no reason to need it, be suspicious, and possibly report them to the authorities based on your good judgement. Also, we tell you when someone has logged on without one.</span>
+            <hr />
+            <label>verifiable state license identification</label>
+            <input name="license_type" ng-model="profileHealer.licenseType" type="text" class="input-xlarge" placeholder="what does this license allow you to do?"><br />
+            <input name="license" ng-model="profileHealer.licenseNumber" type="text" placeholder="license number"><br />
+            <input name="state_issuer_of_license" ng-model="profileHealer.licenseState" type="text" placeholder="state issuing license"><br />
+            <span class="help-block">Please be sure that it is a verifiable license from an issuing state agency.</span>
+            <hr />
+            <label class="checkbox">
+                <input ng-model="profileHealer.approvalRequired" ng-init="submitHealer.approvalRequired=false;" name="joinVillageWithoutApproval" type="checkbox">Allow patients to join my villages without my approving them first</input><br />
+                <input ng-model="profileHealer.safewordRequired" ng-init="submitHealer.safewordRequired=false" name="requireSafeword" type="checkbox">Require a safeword of all joining and entering my villages</input>
+            </label>
+        </fieldset>
+        <div>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button ng-click="joinHealer(submitHealer)" class="joinSubmit btn btn-primary" data-loading-text="Saving..." data-complete-text="Done">Save changes</button>
+        </div>
+    </form>
+</section>

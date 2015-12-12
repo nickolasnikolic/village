@@ -10,8 +10,9 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
             .then(function(data){
 
                 globals.user = data.data[0].node;
+                globals.user.labels = data.data[0].labels[0];
 
-                switch(data.data[0].labels[0]){
+                switch(globals.user.labels){
                     case 'caregiver':
                         $state.go('caregiver');
                         break;
@@ -69,12 +70,31 @@ villageApp.controller('HomeController', ['$scope', '$state', '$http', 'globals',
 
 }])
 
+villageApp.controller('NavigationController', ['$scope', '$state', 'globals', function($scope, $state, globals){
+
+    $scope.goProfile = function(){
+        if(globals.user){
+            console.log(globals.user);
+            switch(globals.user.labels){
+                case 'caregiver':
+                    $state.go('caregiverprofile');
+                    break;
+                case 'caredfor':
+                case 'family':
+                    $state.go('profile');
+                    break;
+            }
+        }
+    };
+
+}])
+
 villageApp.controller('LogoutController', ['$scope', '$state', 'globals', function($scope, $state, globals){
     $scope.logout = function(){
         globals = null;
         $state.go('home');
     };
-}]);
+}])
 
 villageApp.controller('CaregiverController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
 
@@ -123,6 +143,10 @@ villageApp.controller('FamilyController', ['$scope', '$state', '$http', 'globals
         });
 }])
 
+
+villageApp.controller('CaregiverProfileController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
+
+villageApp.controller('ProfileController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {}])
 
 villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
     $scope.stories = [];

@@ -39,6 +39,24 @@ var villageApp = angular.module('villageApp', ['ui.router', 'ngSanitize', 'angul
         }
       })
 
+      .state('profile', {
+        url: '/profile',
+        templateUrl: 'templates/general-profile.html',
+        controller: 'ProfileController',
+        onEnter: function($state) {
+          console.log('general profile');
+        }
+      })
+
+      .state('caregiverprofile', {
+        url: '/caregiverprofile',
+        templateUrl: 'templates/caregiver-profile.html',
+        controller: 'CaregiverProfileController',
+        onEnter: function($state) {
+          console.log('caregiver profile');
+        }
+      })
+
       .state('groups', {
         url: '/groups',
         templateUrl: 'templates/groups.html',

@@ -1,0 +1,29 @@
+<section>
+    <form class="profileForm">
+        <fieldset>
+            <legend>Profile page</legend>
+
+            <label>name</label>
+            <input ng-model="submitProfile.name" name="name" type="text" placeholder="first and last name">
+
+            <label>phone</label>
+            <input ng-model="submitProfile.phone" name="phone" type=text placeholder="1(555)555-5555">
+            <span class="help-block">In an emergency, we will instigate a call to or from you. Otherwise, mum's the word.</span>
+            <label class="checkbox">
+                <input ng-model="submitProfile.neverCall" ng-init="submitFamily.neverCall=false" checked='checked' name="neverCall" type="checkbox">I want you never to do that. <span class="help-inline">You can say no now, then change your mind later.</span>
+            </label>
+            <hr />
+            <label>email</label>
+            <input ng-model="submitProfile.email" name="email" type="text" placeholder="valid email address">
+            <span class="help-block">All email addresses will be verified.</span>
+
+            <label>password</label>
+            <input ng-model="submitProfile.password" name="password" type="password">
+            <span class="help-block">Make it a great password that evil people can't guess. Memorize it.</span>
+        </fieldset>
+        <div>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button ng-click="joinFamily(submitFamily)" class="joinSubmit btn btn-primary" data-loading-text="Saving..." data-complete-text="Done">Save changes</button>
+        </div>
+    </form>
+</section>
