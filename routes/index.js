@@ -221,10 +221,9 @@ router.get('/posts/around/:you', function(req, res, next){
 
 });
 
-router.get('/caregiver/villages/posts/around/:village', function(req, res, next){
+router.get('/caregiver/village/posts/:villageid', function(req, res, next){
 
-    neo.query('match (v:village {uid: {your}})-[:healing]-()<-[*]->(p:post) return p', {your: req.params.village}, function(err, result){
-        console.log(result);
+    neo.query('match (v:village {uid: {yourid} })-[:healing]-()<-[*]->(p:post) return p', {yourid: Number(req.params.villageid)}, function(err, result){
         res.status(200).send(result);
     });
 

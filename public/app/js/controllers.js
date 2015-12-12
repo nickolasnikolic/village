@@ -155,24 +155,28 @@ villageApp.controller('PostController', ['$scope', '$state', '$http', 'globals',
 }])
 
 villageApp.controller('CaregiverPostController', ['$scope', '$state', '$http', 'globals', function($scope, $state, $http, globals) {
+    $scope.villages = [];
+    $http.get('../api/caregiver/villages/' + globals.user.email)
+        .then(function(data){
+            $scope.villages = data.data;
+            refreshPosts($scope.villages);
+        });
 
-    $scope.stories = [];
-    function refreshPosts() {
-        _.each($scope.villages, function (village) {
-            console.log(village);
-            if (village.switch.active) {
+    function refreshPosts(villages) {
+        _.each( villages, function(village) {
+                village.stories = [];
+                console.log(village);
 
-                $http.get('../api/caregiver/villages/posts/around/' + village.uid)
+                $http.get('../api/caregiver/village/posts/' + village.uid)
                     .then(function (data) {
-                        $scope.stories = data.data;
+                        village.stories = data.data;
                     }, function (error) {
                         console.log(error);
                     });
 
-            }
+
         });
     }
-    refreshPosts();
 
     $scope.post = function(){
 
